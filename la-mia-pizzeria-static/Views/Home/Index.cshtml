@@ -1,0 +1,47 @@
+﻿@model List<Pizza> 
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/IndexStyle.css" />
+}
+<div class="container">
+    <h1 class="text-center py-3"> Le Nostre Pizze </h1>
+    <table class="table table-dark border border-white">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Immagine</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Prezzo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Pizza pizza in Model)
+            {
+            <tr>
+                <td>
+                    <img class="img-thumbnail" src="~/img/@pizza.Image" alt="Pizza Margherita">
+                </td>
+                <td width="200px">
+                    @pizza.Name
+                </td>
+                <td>
+                    @pizza.Description
+                </td>
+                <td width="100px" class="text-success fw-bold text-center">
+                    @pizza.Price
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="#">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
