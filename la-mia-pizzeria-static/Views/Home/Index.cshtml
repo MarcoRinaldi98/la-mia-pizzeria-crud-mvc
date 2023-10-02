@@ -1,47 +1,28 @@
-﻿@model List<Pizza> 
+﻿@model List<Pizza>
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Home";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/IndexStyle.css" />
 }
-<div class="container">
-    <h1 class="text-center py-3"> Le Nostre Pizze </h1>
-    <table class="table table-dark border border-white">
-        <thead>
-            <tr class="text-center">
-                <th scope="col">Immagine</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Descrizione</th>
-                <th scope="col">Prezzo</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(Pizza pizza in Model)
-            {
-            <tr>
-                <td>
-                    <img class="img-thumbnail" src="~/img/@pizza.Image" alt="Pizza Margherita">
-                </td>
-                <td width="200px">
-                    @pizza.Name
-                </td>
-                <td>
-                    @pizza.Description
-                </td>
-                <td width="100px" class="text-success fw-bold text-center">
-                    @pizza.Price
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="#">
-                        <i class="fa-solid fa-circle-info"></i>
-                    </a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-6 h-100 d-flex justify-content-center flex-column">
+            <h1> Benvenuti nella mia pizzeria </h1>
+            <p class="text-white fst-italic"> Sfoglia le nostre pizze per scoprire quella piu adatta a te!</p>
+            <div>
+                <a class="btn btn-primary d-inline-block" href="@Url.Action("Index", "Pizza")">
+                    Sfoglia le nostre pizze
+                    <i class="fa-solid fa-right-long"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-6 h-100 d-flex align-items-center justify-content-center">
+            <img class="img-fluid rounded-3" src="~/img/pizza-home.png" alt="Foto pizza">
+        </div>
+    </div>
 </div>
 
