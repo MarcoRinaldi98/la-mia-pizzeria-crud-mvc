@@ -9,7 +9,10 @@
 
 <div class="container">
     <h1 class="text-center py-3"> Le Nostre Pizze </h1>
-    @if (Model.Count > 0)
+    @if (Model.Count() == 0)
+    {
+        <div class="text-white"> Non ci sono pizze attualmente </div>
+    } else
     {
         <div class="row text-center">
             @foreach (Pizza pizza in Model)
@@ -20,19 +23,16 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">@pizza.Name</h5>
-                                <small class="text-success fw-bold"> @pizza.Price </small>
+                                <small class="text-success fw-bold"> € @pizza.Price </small>
                             </div>
                             <p class="card-text text-truncate"> @pizza.Description </p>
                             <div>
-                                <a class="btn btn-primary" href="@Url.Action("Details", "Pizza", new {id = pizza.Id})">Visualizza Dettagli</a>
+                                <a class="btn btn-primary" href="@Url.Action("Details", "Home", new {id = pizza.Id})">Visualizza Dettagli</a>
                             </div>
                         </div>
                     </div>
                 </div>
             }
         </div>
-    } else
-    {
-        <div class="text-white"> Non ci sono pizze attualmente </div>
     }
 </div>

@@ -1,0 +1,43 @@
+﻿@model Pizza
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Creazione Nuova Pizza";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/CreateStyle.css" />
+}
+
+<div class="container">
+    <div class="row py-3">
+        <div class="col-12">
+            <h1 class="text-center pb-3">Pagina creazione nuovo articolo</h1>
+        </div>
+        <form asp-controller="Pizza" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <strong class="text-white">URL Immagine:</strong>
+                <input type="text" class="form-control" asp-for="Image" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <strong class="text-white">Nome:</strong>
+                <input type="text" class="form-control" asp-for="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <strong class="text-white">Descrizione:</strong>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <strong class="text-white">Prezzo:</strong>
+                <input class="d-block w-100" asp-for="Price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary"> CREA PIZZA </button>
+            <a class="btn btn-danger" href="@Url.Action("Index", "Pizza")"> ANNULLA </a>
+        </form>
+    </div>
+</div>
