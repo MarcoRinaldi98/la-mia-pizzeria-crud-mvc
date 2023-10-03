@@ -53,13 +53,34 @@
                                 <a class="btn btn-warning mx-1" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
-                                <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-danger">
-                                        Elimina
-                                    </button>
-                                </form>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </div>
 
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Eliminazione pizza</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-black">
+                                            Vuoi eliminare la pizza?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                            <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-danger">
+                                                    Elimina
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>

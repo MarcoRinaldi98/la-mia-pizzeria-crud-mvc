@@ -1,4 +1,5 @@
-﻿using la_mia_pizzeria_static.Database;
+﻿using la_mia_pizzeria_static.CustomLoggers;
+using la_mia_pizzeria_static.Database;
 using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,42 +8,44 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ICustomLogger _myLogger;
+        private PizzaContext _myDatabase;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(PizzaContext db, ICustomLogger logger)
         {
-            _logger = logger;
+            _myLogger = logger;
+            _myDatabase = db;
         }
 
         public IActionResult Index()
         {
+            _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > Index");
+
             return View();
         }
 
         public IActionResult UtenteIndex()
         {
-            using (PizzaContext db = new PizzaContext())
-            {
-                List<Pizza> pizze = db.Pizze.ToList<Pizza>();
+            _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > UtenteIndex");
 
-                return View(pizze);
-            }
+            List<Pizza> pizze = _myDatabase.Pizze.ToList<Pizza>();
+
+            return View(pizze);
         }
 
         public IActionResult Details(int id)
         {
-            using (PizzaContext db = new PizzaContext())
-            {
-                Pizza? foundedPizza = db.Pizze.Where(Article => Article.Id == id).FirstOrDefault();
+            _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > Details");
 
-                if (foundedPizza == null)
-                {
-                    return NotFound($"La pizza {id} non è stata trovata!");
-                }
-                else
-                {
-                    return View("Details", foundedPizza);
-                }
+            Pizza? foundedPizza = _myDatabase.Pizze.Where(Article => Article.Id == id).FirstOrDefault();
+
+            if (foundedPizza == null)
+            {
+                return NotFound($"La pizza {id} non è stata trovata!");
+            }
+            else
+            {
+                return View("Details", foundedPizza);
             }
         }
 
