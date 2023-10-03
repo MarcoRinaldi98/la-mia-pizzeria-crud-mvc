@@ -1,7 +1,7 @@
 ﻿@model Pizza
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Creazione Nuova Pizza";
+    ViewData["Title"] = "Aggiorna Pizza";
 }
 
 @section Styles {
@@ -11,9 +11,9 @@
 <div class="container">
     <div class="row py-3">
         <div class="col-12">
-            <h1 class="text-center pb-3">Pagina creazione nuova pizza</h1>
+            <h1 class="text-center pb-3">Pagina di modifica pizza</h1>
         </div>
-        <form asp-controller="Pizza" asp-action="Create" method="post">
+        <form asp-controller="Pizza" asp-action="Update" asp-route-itemid="@Model.Id" method="post">
             @Html.AntiForgeryToken()
             <div class="mb-3">
                 <strong class="text-white">URL Immagine:</strong>
@@ -35,8 +35,8 @@
                 <input class="d-block w-100" asp-for="Price" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            
-            <button type="submit" class="btn btn-primary"> CREA PIZZA </button>
+
+            <button type="submit" class="btn btn-primary"> AGGIORNA PIZZA </button>
             <a class="btn btn-danger" href="@Url.Action("Index", "Pizza")"> ANNULLA </a>
         </form>
     </div>
