@@ -3,6 +3,7 @@ using la_mia_pizzeria_static.Models;
 using la_mia_pizzeria_static.Database;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using la_mia_pizzeria_static.CustomLoggers;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static.Controllers
 {
@@ -21,7 +22,7 @@ namespace la_mia_pizzeria_static.Controllers
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Index");
 
-            List<Pizza> pizze = _myDatabase.Pizze.ToList<Pizza>();
+            List<Pizza> pizze = _myDatabase.Pizze.Include(pizza => pizza.Category).ToList<Pizza>();
 
             return View(pizze);
         }
@@ -30,7 +31,7 @@ namespace la_mia_pizzeria_static.Controllers
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Details");
 
-            Pizza? foundedPizza = _myDatabase.Pizze.Where(Article => Article.Id == id).FirstOrDefault();
+            Pizza? foundedPizza = _myDatabase.Pizze.Where(Article => Article.Id == id).Include(pizza => pizza.Category).FirstOrDefault();
 
             if (foundedPizza == null)
             {
@@ -47,19 +48,26 @@ namespace la_mia_pizzeria_static.Controllers
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Create");
 
-            return View("Create");
+            List<Category> categories = _myDatabase.Categories.ToList();
+
+            PizzaFormModel model = new PizzaFormModel { Pizza = new Pizza(), Categories = categories };
+
+            return View("Create", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza newPizza)
+        public IActionResult Create(PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
-                return View("Create", newPizza);
+                List<Category> categories = _myDatabase.Categories.ToList();
+                data.Categories = categories;
+
+                return View("Create", data);
             }
 
-            _myDatabase.Pizze.Add(newPizza);
+            _myDatabase.Pizze.Add(data.Pizza);
             _myDatabase.SaveChanges();
 
             return RedirectToAction("Index");
@@ -78,17 +86,24 @@ namespace la_mia_pizzeria_static.Controllers
             {
                 _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Update");
 
-                return View("Update", pizzaToEdit);
+                List<Category> categories = _myDatabase.Categories.ToList();
+
+                PizzaFormModel model = new PizzaFormModel { Pizza = pizzaToEdit, Categories = categories };
+
+                return View("Update", model);
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, Pizza modifiedPizza)
+        public IActionResult Update(int id, PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", modifiedPizza);
+                List<Category> categories = _myDatabase.Categories.ToList();
+                data.Categories = categories;
+
+                return View("Update", data);
             }
 
             Pizza? pizzaToUpdate = _myDatabase.Pizze.Find(id);
@@ -96,7 +111,7 @@ namespace la_mia_pizzeria_static.Controllers
             if (pizzaToUpdate != null)
             {
                 EntityEntry<Pizza> entryEntity = _myDatabase.Entry(pizzaToUpdate);
-                entryEntity.CurrentValues.SetValues(modifiedPizza);
+                entryEntity.CurrentValues.SetValues(data.Pizza);
 
                 _myDatabase.SaveChanges();
 

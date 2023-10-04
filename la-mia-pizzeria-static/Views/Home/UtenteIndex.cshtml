@@ -23,7 +23,17 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <h5 class="card-title">@pizza.Name</h5>
-                                <small class="text-success fw-bold"> € @pizza.Price </small>
+                                <small class="text-success fw-bold"> €@pizza.Price </small>
+                            </div>
+                            <div class="fst-italic">
+                                @if (pizza.Category != null)
+                                {
+                                    <span>@pizza.Category.Title</span>
+                                }
+                                else
+                                {
+                                    <span>Nessuna categoria associata</span>
+                                }
                             </div>
                             <p class="card-text text-truncate"> @pizza.Description </p>
                             <div>

@@ -21,6 +21,7 @@
                     <th scope="col">Immagine</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Descrizione</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">
                         <a class="btn btn-success" href="@Url.Action("Create", "Pizza")">
@@ -42,8 +43,18 @@
                         <td>
                             @pizza.Description
                         </td>
-                        <td width="70px" class="text-success fw-bold text-center">
-                            € @pizza.Price
+                        <td>
+                            @if (pizza.CategoryId != null)
+                            {
+                                <span>@pizza.Category.Title</span>
+                            }
+                            else
+                            {
+                                <span>Nessuna</span>
+                            }
+                        </td>
+                        <td class="text-success fw-bold text-center">
+                            €@pizza.Price
                         </td>
                         <td>
                             <div class="d-flex">

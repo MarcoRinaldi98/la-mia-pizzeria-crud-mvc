@@ -7,7 +7,7 @@ namespace la_mia_pizzeria_static.Models
     public class Pizza
     {
         public int Id { get; set; }
-        [Url(ErrorMessage = "Devi inserire un link valido ad un'immagine")]
+        //[Url(ErrorMessage = "Devi inserire un link valido ad un'immagine")]
         [MaxLength(500, ErrorMessage = "Il link non può essere lungo più di 500 caratteri")]
         public string Image { get; set; }
         [Required(ErrorMessage = "Il nome della pizza è obbligatorio")]
@@ -20,6 +20,10 @@ namespace la_mia_pizzeria_static.Models
         [Required(ErrorMessage = "Il prezzo della pizza è obbligatorio")]
         [Range(1, 100, ErrorMessage = "Il prezzo dev'essere di almeno 1 euro e massimo di 100 euro")]
         public decimal Price { get; set; }
+
+        // Creiamo la relazione 1:N
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
 
         public Pizza()
         {

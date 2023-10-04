@@ -1,4 +1,4 @@
-﻿@model Pizza
+﻿@model PizzaFormModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Creazione Nuova Pizza";
@@ -17,23 +17,33 @@
             @Html.AntiForgeryToken()
             <div class="mb-3">
                 <strong class="text-white">URL Immagine:</strong>
-                <input type="text" class="form-control" asp-for="Image" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <input type="text" class="form-control" asp-for="Pizza.Image" />
+                <span asp-validation-for="Pizza.Image" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <strong class="text-white">Nome:</strong>
-                <input type="text" class="form-control" asp-for="Name" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input type="text" class="form-control" asp-for="Pizza.Name" />
+                <span asp-validation-for="Pizza.Name" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <strong class="text-white">Descrizione:</strong>
-                <textarea class="form-control" asp-for="Description"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <textarea class="form-control" asp-for="Pizza.Description"></textarea>
+                <span asp-validation-for="Pizza.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <strong class="text-white">Prezzo:</strong>
-                <input class="d-block w-100" asp-for="Price" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <input class="d-block w-100" asp-for="Pizza.Price" />
+                <span asp-validation-for="Pizza.Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <strong class="text-white">Categoria:</strong>
+                <select asp-for="Pizza.CategoryId" rows="10" class="form-select">
+                    <option value="">Seleziona la categoria...</option>
+                    @foreach (Category category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Title</option>
+                    }
+                </select>
             </div>
             
             <button type="submit" class="btn btn-primary"> CREA PIZZA </button>

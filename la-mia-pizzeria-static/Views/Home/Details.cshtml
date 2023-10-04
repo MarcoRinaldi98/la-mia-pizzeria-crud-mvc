@@ -15,6 +15,17 @@
         Prezzo: 
         <span class="text-success fw-bolder"> € @Model.Price </span>
     </div>
+    <div class="text-white py-2">
+        Categoria:
+        @if (Model.Category != null)
+        {
+            <span>@Model.Category.Title</span>
+        }
+        else
+        {
+            <span>Nessuna categoria associata</span>
+        }
+    </div>
     <div class="row">
         <div class="col-6">
             <img class="img-thumbnail" src="@Model.Image" alt="@Model.Name">
