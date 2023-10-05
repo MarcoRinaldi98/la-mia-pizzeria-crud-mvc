@@ -4,6 +4,7 @@ namespace la_mia_pizzeria_static.ValidationAttributes
 {
     public class MoreThanFiveWords : ValidationAttribute
     {
+        // Validazione personalizzata per far si che un campo contenga almeno 5 parole
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value is string)

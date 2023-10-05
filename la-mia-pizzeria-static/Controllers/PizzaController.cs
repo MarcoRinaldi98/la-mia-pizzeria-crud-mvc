@@ -12,7 +12,9 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
+        // Custom Logger
         private ICustomLogger _myLogger;
+        // Collegamento al DataBase
         private PizzaContext _myDatabase;
 
         public PizzaController(PizzaContext db, ICustomLogger logger)
@@ -21,6 +23,7 @@ namespace la_mia_pizzeria_static.Controllers
             _myDatabase = db;
         }
 
+        // Vista Index
         public IActionResult Index()
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Index");
@@ -30,6 +33,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(pizze);
         }
 
+        // Vista Details
         public IActionResult Details(int id)
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Pizza > Details");
@@ -46,6 +50,7 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        // Creazione di una pizza
         [HttpGet]
         public IActionResult Create()
         {
@@ -121,6 +126,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        // Modifica di una pizza
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -219,6 +225,7 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        // Cancellazione di una pizza
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)

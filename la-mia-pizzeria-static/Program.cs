@@ -11,6 +11,7 @@ namespace la_mia_pizzeria_static
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            // Custom Loggers
             builder.Services.AddScoped<ICustomLogger, CustomFileLogger>();
             builder.Services.AddScoped<PizzaContext, PizzaContext>();
 

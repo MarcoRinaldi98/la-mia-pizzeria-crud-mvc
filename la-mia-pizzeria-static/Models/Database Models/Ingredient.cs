@@ -2,12 +2,14 @@
 {
     public class Ingredient
     {
+        // ATTRIBUTI
         public int Id { get; set; }
-
         public string Title { get; set; }
 
+        // relazione N:N 
         public List<Pizza> Pizze { get; set; }
 
+        // COSTRUTTORE
         public Ingredient()
         {
 

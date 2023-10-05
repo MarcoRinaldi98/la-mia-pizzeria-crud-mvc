@@ -6,6 +6,7 @@ namespace la_mia_pizzeria_static.CustomLoggers
     {
         public void WriteLog(string message)
         {
+            // Visualizzazione delle LOG in console
             Debug.WriteLine("LOG: " + message);
         }
     }

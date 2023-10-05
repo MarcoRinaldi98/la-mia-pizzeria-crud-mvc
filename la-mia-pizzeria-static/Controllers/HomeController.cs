@@ -9,7 +9,9 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class HomeController : Controller
     {
+        // Custom Logger
         private ICustomLogger _myLogger;
+        // Collegamento al DataBase
         private PizzaContext _myDatabase;
 
         public HomeController(PizzaContext db, ICustomLogger logger)
@@ -18,6 +20,7 @@ namespace la_mia_pizzeria_static.Controllers
             _myDatabase = db;
         }
 
+        // Vista Index
         public IActionResult Index()
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > Index");
@@ -25,6 +28,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View();
         }
 
+        // Vista UtenteIndex
         public IActionResult UtenteIndex()
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > UtenteIndex");
@@ -34,6 +38,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(pizze);
         }
 
+        // Vista Datails
         public IActionResult Details(int id)
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > Details");
@@ -50,6 +55,7 @@ namespace la_mia_pizzeria_static.Controllers
             }
         }
 
+        // Vista Privacy
         public IActionResult Privacy()
         {
             return View();

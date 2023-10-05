@@ -8,6 +8,7 @@ namespace la_mia_pizzeria_static.Models
 {
     public class Pizza
     {
+        // ATTRIBUTI
         public int Id { get; set; }
         //[Url(ErrorMessage = "Devi inserire un link valido ad un'immagine")]
         [MaxLength(500, ErrorMessage = "Il link non può essere lungo più di 500 caratteri")]
@@ -23,13 +24,14 @@ namespace la_mia_pizzeria_static.Models
         [Range(1, 100, ErrorMessage = "Il prezzo dev'essere di almeno 1 euro e massimo di 100 euro")]
         public decimal Price { get; set; }
 
-        // Creiamo la relazione 1:N
+        // relazione 1:N
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        // creiamo la relazione N:N 
+        // relazione N:N 
         public List<Ingredient>? Ingredients { get; set; }
 
+        // COSTRUTTORE
         public Pizza()
         {
             
