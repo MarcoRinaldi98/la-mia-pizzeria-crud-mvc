@@ -1,4 +1,5 @@
-﻿@model List<Pizza>
+﻿@using la_mia_pizzeria_static.Models.Database_Models;
+@model List<Pizza>
 @{
     ViewData["Title"] = "Le Pizze";
 }
@@ -30,9 +31,18 @@
                                 {
                                     <span>@pizza.Category.Title</span>
                                 }
+                            </div>
+                            <div class="pb-2">
+                                @if (pizza.Ingredients != null)
+                                {
+                                    @foreach (Ingredient ingredient in pizza.Ingredients)
+                                    {
+                                        <span class="badge rounded-pill bg-info text-dark">@ingredient.Title</span>
+                                    }
+                                }
                                 else
                                 {
-                                    <span>Nessuna categoria associata</span>
+                                    <small class="fst-italic text-white">Nessun ingrediente associato</small>
                                 }
                             </div>
                             <p class="card-text text-truncate"> @pizza.Description </p>

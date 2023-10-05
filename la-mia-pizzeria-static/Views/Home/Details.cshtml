@@ -1,4 +1,5 @@
-﻿@model Pizza
+﻿@using la_mia_pizzeria_static.Models.Database_Models;
+@model Pizza
 @{
     Layout = "_Layout";
     ViewData["Title"] = $"Dettaglio {Model.Name}";
@@ -11,6 +12,19 @@
 <div class="container">
     <h1 class="text-center"> Dettaglio Pizza </h1>
     <h4 class="text-white"> @Model.Name </h4>
+    <div>
+        @if (Model.Ingredients != null && Model.Ingredients.Count > 0)
+        {
+            @foreach (Ingredient ingredient in Model.Ingredients)
+            {
+                <span class="badge rounded-pill bg-info text-dark">@ingredient.Title</span>
+            }
+        }
+        else
+        {
+            <small class="text-white"> Nessun ingrediente associato!</small>
+        }
+    </div>
     <div class="text-white py-2">
         Prezzo: 
         <span class="text-success fw-bolder"> € @Model.Price </span>

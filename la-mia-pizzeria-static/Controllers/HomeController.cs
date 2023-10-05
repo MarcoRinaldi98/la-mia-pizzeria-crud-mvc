@@ -29,7 +29,7 @@ namespace la_mia_pizzeria_static.Controllers
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > UtenteIndex");
 
-            List<Pizza> pizze = _myDatabase.Pizze.Include(pizza => pizza.Category).ToList<Pizza>();
+            List<Pizza> pizze = _myDatabase.Pizze.Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).ToList<Pizza>();
 
             return View(pizze);
         }
@@ -38,7 +38,7 @@ namespace la_mia_pizzeria_static.Controllers
         {
             _myLogger.WriteLog("L'utente è arrivato sulla pagina Home > Details");
 
-            Pizza? foundedPizza = _myDatabase.Pizze.Where(Article => Article.Id == id).Include(pizza => pizza.Category).FirstOrDefault();
+            Pizza? foundedPizza = _myDatabase.Pizze.Where(Article => Article.Id == id).Include(pizza => pizza.Category).Include(pizza => pizza.Ingredients).FirstOrDefault();
 
             if (foundedPizza == null)
             {

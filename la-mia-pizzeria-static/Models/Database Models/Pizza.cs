@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Azure;
+using la_mia_pizzeria_static.Models.Database_Models;
 using la_mia_pizzeria_static.ValidationAttributes;
 
 namespace la_mia_pizzeria_static.Models
@@ -24,6 +26,9 @@ namespace la_mia_pizzeria_static.Models
         // Creiamo la relazione 1:N
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
+
+        // creiamo la relazione N:N 
+        public List<Ingredient>? Ingredients { get; set; }
 
         public Pizza()
         {

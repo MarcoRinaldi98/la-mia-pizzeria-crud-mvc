@@ -1,4 +1,5 @@
-﻿@model List<Pizza>
+﻿@using la_mia_pizzeria_static.Models.Database_Models;
+@model List<Pizza>
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Tabella Pizze";
@@ -22,6 +23,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Ingredienti</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">
                         <a class="btn btn-success" href="@Url.Action("Create", "Pizza")">
@@ -51,6 +53,19 @@
                             else
                             {
                                 <span>Nessuna</span>
+                            }
+                        </td>
+                        <td>
+                            @if (pizza.Ingredients != null)
+                            {
+                                @foreach (Ingredient ingredient in pizza.Ingredients)
+                                {
+                                    <span class="badge rounded-pill bg-info text-dark">@ingredient.Title</span>
+                                }
+                            }
+                            else
+                            {
+                                <span>Nessuno</span>
                             }
                         </td>
                         <td class="text-success fw-bold text-center">
