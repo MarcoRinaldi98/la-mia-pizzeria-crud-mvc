@@ -122,6 +122,9 @@ namespace la_mia_pizzeria_static.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Assegno il ruolo default USER all'utente appena creato
+                    await _userManager.AddToRoleAsync(user, "USER");
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
