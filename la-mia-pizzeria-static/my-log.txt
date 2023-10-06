@@ -338,3 +338,9 @@
 06-10-2023 12:06:16 LOG: L'utente è arrivato sulla pagina Home > Index
 06-10-2023 12:06:23 LOG: L'utente è arrivato sulla pagina Home > Index
 06-10-2023 12:06:24 LOG: L'utente è arrivato sulla pagina Pizza > Index
+06-10-2023 12:11:30 LOG: L'utente è arrivato sulla pagina Home > Index
+06-10-2023 12:11:35 LOG: L'utente è arrivato sulla pagina Home > Index
+06-10-2023 12:24:55 LOG: L'utente è arrivato sulla pagina Home > Index
+06-10-2023 12:25:07 LOG: L'utente è arrivato sulla pagina Home > Index
+06-10-2023 12:25:14 LOG: L'utente è arrivato sulla pagina Home > Index
+06-10-2023 12:27:05 LOG: L'utente è arrivato sulla pagina Home > Index
