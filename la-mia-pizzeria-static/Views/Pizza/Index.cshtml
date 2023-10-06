@@ -30,11 +30,17 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Ingredienti</th>
                     <th scope="col">Prezzo</th>
-                    <th scope="col">
-                        <a class="btn btn-success" href="@Url.Action("Create", "Pizza")">
-                            Crea una pizza
-                        </a>
-                    </th>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <th scope="col">
+                            <a class="btn btn-success" href="@Url.Action("Create", "Pizza")">
+                                Crea una pizza
+                            </a>
+                        </th>
+                    } else
+                    {
+                        <th scope="col"></th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +67,7 @@
                             }
                             else
                             {
-                                <span>Nessuna</span>
+                                <span class="text-white">Nessuna</span>
                             }
                         </td>
                         <td>
@@ -75,7 +81,7 @@
                             }
                             else
                             {
-                                <span>Nessuno</span>
+                                <span class="text-white">Nessuno</span>
                             }
                         </td> 
                         <!-- Visualizzo il prezzo della pizza -->
@@ -88,38 +94,42 @@
                                 <a class="btn btn-primary" href="@Url.Action("Details", "Pizza", new {id = pizza.Id})">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </a>
-                                <!-- Pulsante che mi reindirizza alla pagina di MODIFICA della pizza -->
-                                <a class="btn btn-warning mx-1" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">
-                                    <i class="fa-solid fa-pen"></i>
-                                </a>
-                                <!-- Pulsante che mi apre la modale per procedere all'ELIMINAZIONE della pizza -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#exampleModal" + pizza.Id)">
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </button>
-                            </div>
-                            <!-- Modale -->
-                            <div class="modal fade" id="@("exampleModal" + pizza.Id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Eliminazione pizza</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-black">
-                                            Vuoi eliminare la pizza?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                            <!-- FORM di ELIMINAZIONE della pizza -->
-                                            <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
-                                                @Html.AntiForgeryToken()
-                                                <button type="submit" class="btn btn-danger">
-                                                    Elimina
-                                                </button>
-                                            </form>
+                                @if (User.IsInRole("ADMIN"))
+                                {
+                                    <!-- Pulsante che mi reindirizza alla pagina di MODIFICA della pizza -->
+                                    <a class="btn btn-warning mx-1" href="@Url.Action("Update", "Pizza", new { id = pizza.Id })">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <!-- Pulsante che mi apre la modale per procedere all'ELIMINAZIONE della pizza -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#exampleModal" + pizza.Id)">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                    <!-- Modale -->
+                                    <div class="modal fade" id="@("exampleModal" + pizza.Id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Eliminazione pizza</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-black">
+                                                    Vuoi eliminare la pizza?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                    <!-- FORM di ELIMINAZIONE della pizza -->
+                                                    <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="submit" class="btn btn-danger">
+                                                            Elimina
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </td>
                     </tr>
