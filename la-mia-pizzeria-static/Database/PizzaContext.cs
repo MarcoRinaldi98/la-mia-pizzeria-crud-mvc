@@ -2,10 +2,12 @@
 using la_mia_pizzeria_static.Models;
 using Azure;
 using la_mia_pizzeria_static.Models.Database_Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace la_mia_pizzeria_static.Database
 {
-    public class PizzaContext : DbContext
+    public class PizzaContext : IdentityDbContext<IdentityUser>
     {
         // Liste dei dati nel Database
         public DbSet<Pizza> Pizze { get; set; }
