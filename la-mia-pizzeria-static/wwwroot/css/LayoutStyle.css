@@ -52,11 +52,3 @@ footer {
         letter-spacing: .2rem;
     }
 
-
-
-/* MEDIA QUERY */
-@media(min-width:768px) {
-    header .navbar-nav {
-        margin-left: -120px;
-    }
-}

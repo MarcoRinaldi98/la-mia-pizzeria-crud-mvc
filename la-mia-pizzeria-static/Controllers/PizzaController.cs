@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Azure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using la_mia_pizzeria_static.Models.Database_Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace la_mia_pizzeria_static.Controllers
 {
+    [Authorize]
     public class PizzaController : Controller
     {
         // Custom Logger
